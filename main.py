@@ -60,8 +60,9 @@ def get_textures(file, dir):
 
     print("Copying textures...")
     for dirname in ("blockstates", "models", "textures"):
-        os.makedirs(f"{dir}/t/assets/minecraft/{dirname}", exist_ok=True)
-        recursive_copy(f"{zip_dir.name}/assets/minecraft/{dirname}", f"{dir}/t/assets/minecraft/{dirname}")
+        if os.path.exists(f"{zip_dir.name}/assets/minecraft/{dirname}"):
+            os.makedirs(f"{dir}/t/assets/minecraft/{dirname}", exist_ok=True)
+            recursive_copy(f"{zip_dir.name}/assets/minecraft/{dirname}", f"{dir}/t/assets/minecraft/{dirname}")
 
     print("Cleaning up extracted files...")
     zip_dir.cleanup()
